@@ -1,32 +1,32 @@
-class MyCircularQueue:
+class CircularQueue:
     def __init__(self, k: int):
         self.size = k
         self.arr = [-1] * self.size
         self.start = 0
         self.end = 0
 
-    def enQueue(self, value: int) -> bool:
-        if self.isFull():
+    def en_queue(self, value: int) -> bool:
+        if self.is_full():
             return False
         self.arr[self.end] = value
         self.end = (self.end + 1) % self.size
         return True
 
-    def deQueue(self) -> bool:
-        if self.isEmpty():
+    def de_queue(self) -> bool:
+        if self.is_empty():
             return False
         self.arr[self.start] = -1
         self.start = (self.start + 1) % self.size 
         return True
 
-    def Front(self) -> int:
+    def front(self) -> int:
         return self.arr[self.start]
 
-    def Rear(self) -> int:
+    def end(self) -> int:
         return self.arr[(self.end + self.size - 1) % self.size]
 
-    def isEmpty(self) -> bool:
+    def is_empty(self) -> bool:
         return self.start == self.end and self.arr[self.start] == -1
 
-    def isFull(self) -> bool:
+    def is_full(self) -> bool:
         return self.start == self.end and self.arr[self.start] != -1
