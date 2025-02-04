@@ -22,7 +22,7 @@ class CircularQueue:
     def front(self) -> int:
         return self.arr[self.start]
 
-    def end(self) -> int:
+    def back(self) -> int:
         return self.arr[(self.end + self.size - 1) % self.size]
 
     def is_empty(self) -> bool:
