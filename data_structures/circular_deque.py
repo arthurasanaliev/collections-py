@@ -1,4 +1,4 @@
-class MyCircularDeque:
+class CircularDeque:
     def __init__(self, k: int):
         self.size = k
         self.count = 0
@@ -6,58 +6,54 @@ class MyCircularDeque:
         self.start = 0
         self.end = 0
 
-    def insertFront(self, value: int) -> bool:
-        if self.isFull():
+    def insert_front(self, value: int) -> bool:
+        if self.is_full():
             return False
-        if self.isEmpty():
-            self.arr[self.end] = value 
-            self.count += 1
-            return True
         
-        self.start = (self.start + self.size - 1) % self.size 
+        if not self.is_empty():
+            self.start = (self.start + self.size - 1) % self.size 
         self.arr[self.start] = value
         self.count += 1
         return True
 
-    def insertLast(self, value: int) -> bool:
-        if self.isFull():
+    def insert_last(self, value: int) -> bool:
+        if self.is_full():
             return False
-        if self.isEmpty():
-            self.arr[self.start] = value
-            self.count += 1
-            return True
 
-        self.end = (self.end + self.size + 1) % self.size
+        if not self.is_empty():
+            self.end = (self.end + self.size + 1) % self.size
         self.arr[self.end] = value
         self.count += 1
         return True
 
-    def deleteFront(self) -> bool:
-        if self.isEmpty():
+    def delete_front(self) -> bool:
+        if self.is_empty():
             return False
 
         self.arr[self.start] = -1
-        self.start = (self.start + self.size + 1) % self.size
+        if self.count > 1:
+            self.start = (self.start + self.size + 1) % self.size
         self.count -= 1
         return True
 
-    def deleteLast(self) -> bool:
-        if self.isEmpty():
+    def delete_last(self) -> bool:
+        if self.is_empty():
             return False
 
         self.arr[self.end] = -1
-        self.end = (self.end + self.size - 1) % self.size
+        if self.count > 1:
+            self.end = (self.end + self.size - 1) % self.size
         self.count -= 1
         return True
 
-    def getFront(self) -> int:
-        return -1 if self.isEmpty() else self.arr[self.start]
+    def front(self) -> int:
+        return -1 if self.is_empty() else self.arr[self.start]
 
-    def getRear(self) -> int:
-        return -1 if self.isEmpty() else self.arr[self.end]
+    def rear(self) -> int:
+        return -1 if self.is_empty() else self.arr[self.end]
 
-    def isEmpty(self) -> bool:
+    def is_empty(self) -> bool:
         return self.count == 0
 
-    def isFull(self) -> bool:
+    def is_full(self) -> bool:
         return self.count == self.size 
